@@ -1,21 +1,14 @@
-/*
-getComputerChoice -> random r, p, s
-getHumanChoice -> prompt
-init humanScore & computerScore at 0
-playRound (humanChoice, computerChoice) -> score ++ depending on winner
-playGame -> play 5 rounds
-*/
-
-//START game
+// INIT game
 function playGame () {
-    
-    //INITIALIZE humanScore, computerScore, roundCounter at 0
-    let humanScore = 0;
-    let computerScore = 0;
-    let roundCounter = 0;
+    //  INIT scores, roundCounter at 0
+        let humanScore = 0;
+        let computerScore = 0;
+        let roundCounter = 0;
+        let humanChoice;
+        let humanChoiceNumber;
+        
 
-    //GENERATE computer choice
-    //computerChoice = integer between 1 and 3
+    //  GENERATE computer answer (#)
     function getComputerChoice () {
         let computerChoice = Math.floor(Math.random() * 3) + 1;
         let computerChoiceName;
@@ -29,91 +22,82 @@ function playGame () {
         } else {
             console.log("Oops, something went wrong with computerChoice.")
         }
-        console.log("Computer choice: ", computerChoiceName);
+        console.log("Computer: ", computerChoiceName);
+        //console.log("Computer #: ", computerChoice);
         return computerChoice;
     }
 
-    //PROMPT for human choice
+    //  PROMPT for human answer (word)
     function getHumanChoice () {
-        let humanChoice = prompt("Rock, paper, scissors?");
-        let humanChoiceNumber;
+        humanChoice = prompt("Rock, paper, scissors?");
+        //      CONVERT human answer to #
+        function convertHumanChoice (hChoice) {
 
-    //CONVERT humanChoice to number
-        //rock = 1
-        //paper = 2
-        //scissors = 3
-        //humanChoice = number
-    function convertHumanChoice (answer) {
-        if (humanChoice.toLowerCase() == "rock") {
-            humanChoiceNumber = 1;
-            return humanChoiceNumber;
-        } else if (humanChoice.toLowerCase() == "paper") {
-            humanChoiceNumber = 2;
-            return humanChoiceNumber;
-        } else if (humanChoice.toLowerCase() == "scissors") {
-            humanChoiceNumber = 3;
-            return humanChoiceNumber;
-        } else {
-            alert("Please enter your choice again. Valid options are: rock, paper, scissors.\nNOT case sensitive");
-            //humanChoice = prompt("Rock, paper, scissors?");
-            //console.log("rerunning...");
-            //convertHumanChoice(humanChoice);
-            getHumanChoice();
-            return humanChoiceNumber;
+            if (hChoice.toLowerCase() == "rock") {
+                humanChoiceNumber = 1;
+                return humanChoiceNumber;
+            }
+            else if (hChoice.toLowerCase() == "paper") {
+                humanChoiceNumber = 2;
+                return humanChoiceNumber;
+            }
+            else if (hChoice.toLowerCase() == "scissors") {
+                humanChoiceNumber = 3;
+                return humanChoiceNumber;
+            }
+            else {
+                alert("Please enter your choice again. Valid options are: rock, paper, scissors.\nNOT case sensitive");
+                getHumanChoice();
+            }
         }
-    }
-    convertHumanChoice(humanChoice);
-    console.log("User choice: ", humanChoice);
-    return humanChoiceNumber;
+        convertHumanChoice(humanChoice);
     }
 
-    //COMPARE humanChoice to computerChoice
+    //  PLAY round
     function playRound (humanChoice, computerChoice) {
+
+        //      COMPARE answers
+        //      ADJUST score respectively
         // IF (user - comp) = -1 || 2 -> computer wins
         if ((humanChoice - computerChoice) == -1 || (humanChoice - computerChoice) == 2) {
-            console.log("Computer wins!");
             computerScore++;
+            console.log("Computer wins! User: ", humanScore, " Computer: ", computerScore);
         }
         // ELIF (user - comp) = -2 || 1 -> user wins
         else if ((humanChoice - computerChoice) == -2 || (humanChoice - computerChoice) == 1) {
-            console.log("User wins!");
             humanScore++;
+            console.log("User wins! User: ", humanScore, " Computer: ", computerScore);
         }
         // ELIF (user == comp) -> tie
         else if (humanChoice == computerChoice) {
-            console.log("It's a tie!");
+            console.log("It's a tie! User: ", humanScore, " Computer: ", computerScore);
         }
     }
 
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice());
-        //playRound(humanChoiceNumber, computerChoice);
-        console.log("User score: ", humanScore, "Computer score: ", computerScore);
+    for (let i = 0; (humanScore + computerScore) < 5; i++) {
+        getHumanChoice();
+        console.log("User: ", humanChoice);
+
+        playRound(humanChoiceNumber, getComputerChoice());
+
         roundCounter++;
         console.log("Round #: ", roundCounter);
+        console.log("___________________________\n");
+    }
+
+    if (humanScore > computerScore) {
+        console.log("User wins! ", humanScore, " - ", computerScore);
+    }
+    else if (humanScore < computerScore) {
+        console.log("Computer wins! ", computerScore, " - ", humanScore);
+    }
+    else if (humanScore == computerScore) {
+        console.log("Oh no! It's a tie. ", humanScore, " even.");
+    }
+    else {
+        console.log("Hmm... something's not right.");
     }
 }
 
+console.log("Lets play best of 5!");
 playGame();
-
-//console.log("Computer: ", computerChoice, "\nUser: ", humanChoiceNumber);
-
-/*
-1rock-1rock -> tie                1 = 1
-1rock-2paper -> comp              1 < 2 ... c wins -1
-1rock-3scissors -> user           1 < 3 ... u wins -2
-2paper-1rock -> user              2 > 1 ... u wins  1       
-2paper-2paper -> tie              2 = 2
-2paper-3scissors -> comp          2 < 3 ... c wins -1
-3scissors-1rock -> comp           3 > 1 ... c wins  2
-3scissors-2paper -> user          3 > 2 ... u wins  1
-3scissors-3scissors -> tie        3 = 3
-
-comp wins -1, -1, 2
-user wins -2, 1, 1
-tie         0, 0, 0
-
-IF (user - comp) = -1 || 2 -> computer wins
-ELIF (user - comp) = -2 || 1 -> user wins
-ELIF (user == comp) -> tie
-*/
