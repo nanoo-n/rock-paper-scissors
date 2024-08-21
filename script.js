@@ -23,7 +23,6 @@ function playGame () {
             console.log("Oops, something went wrong with computerChoice.")
         }
         console.log("Computer: ", computerChoiceName);
-        //console.log("Computer #: ", computerChoice);
         return computerChoice;
     }
 
