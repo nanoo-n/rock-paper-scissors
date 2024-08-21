@@ -8,9 +8,7 @@ playGame -> play 5 rounds
 
 //START game
 function playGame () {
-    let humanChoiceNumber;
-    let computerChoice;
-
+    
     //INITIALIZE humanScore, computerScore, roundCounter at 0
     let humanScore = 0;
     let computerScore = 0;
@@ -19,15 +17,26 @@ function playGame () {
     //GENERATE computer choice
     //computerChoice = integer between 1 and 3
     function getComputerChoice () {
-        computerChoice = Math.floor(Math.random() * 3) + 1;
-        console.log("Computer choice #: ", computerChoice);
+        let computerChoice = Math.floor(Math.random() * 3) + 1;
+        let computerChoiceName;
+
+        if (computerChoice == 1) {
+            computerChoiceName = "rock";
+        } else if (computerChoice == 2) {
+            computerChoiceName = "paper";
+        } else if (computerChoice == 3) {
+            computerChoiceName = "scissors";
+        } else {
+            console.log("Oops, something went wrong with computerChoice.")
+        }
+        console.log("Computer choice: ", computerChoiceName);
         return computerChoice;
     }
 
     //PROMPT for human choice
     function getHumanChoice () {
         let humanChoice = prompt("Rock, paper, scissors?");
-        //let humanChoiceNumber;
+        let humanChoiceNumber;
 
     //CONVERT humanChoice to number
         //rock = 1
@@ -50,10 +59,12 @@ function playGame () {
             //console.log("rerunning...");
             //convertHumanChoice(humanChoice);
             getHumanChoice();
+            return humanChoiceNumber;
         }
     }
     convertHumanChoice(humanChoice);
-    console.log("User choice #: ", humanChoiceNumber);
+    console.log("User choice: ", humanChoice);
+    return humanChoiceNumber;
     }
 
     //COMPARE humanChoice to computerChoice
@@ -75,10 +86,9 @@ function playGame () {
     }
 
     for (let i = 0; i < 5; i++) {
-        //playRound(getHumanChoice(), getComputerChoice());
-        playRound(humanChoiceNumber, computerChoice);
-        console.log("User score: ", humanScore);
-        console.log("Computer score: ", computerScore);
+        playRound(getHumanChoice(), getComputerChoice());
+        //playRound(humanChoiceNumber, computerChoice);
+        console.log("User score: ", humanScore, "Computer score: ", computerScore);
         roundCounter++;
         console.log("Round #: ", roundCounter);
     }
