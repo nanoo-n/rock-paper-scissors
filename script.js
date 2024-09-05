@@ -6,7 +6,7 @@ function playGame () {
     const roundWinner = document.querySelector(".round-winner");
     const userScore = document.querySelector(".user-score");
     const computerScoreDisp = document.querySelector(".computer-score");
-    const roundCount = document.querySelector(".rounds");
+    const roundCount = document.querySelector(".round-n");
 
 
     //  INIT scores, roundCounter at 0
@@ -24,13 +24,13 @@ function playGame () {
 
         if (computerChoice == 1) {
             computerChoiceName = "rock";
-            computerChoiceDisp.textContent = "Computer choice: ROCK";
+            computerChoiceDisp.textContent = "✊";
         } else if (computerChoice == 2) {
             computerChoiceName = "paper";
-            computerChoiceDisp.textContent = "Computer choice: PAPER";
+            computerChoiceDisp.textContent = "✋";
         } else if (computerChoice == 3) {
             computerChoiceName = "scissors";
-            computerChoiceDisp.textContent = "Computer choice: SCISSORS";
+            computerChoiceDisp.textContent = "🖖";
         } else {
             console.log("Oops, something went wrong with computerChoice.")
         }
@@ -46,19 +46,19 @@ function playGame () {
         //getComputerChoice();
 
         switch(target.className) {
-            case 'rock':
+            case 'rock buttons':
                 console.log("User: rock");
                 humanChoiceNumber = 1;
                 //getComputerChoice();
                 playRound(humanChoiceNumber, getComputerChoice());
                 break;
-            case 'paper':
+            case 'paper buttons':
                 console.log("User: paper");
                 humanChoiceNumber = 2;
                 //getComputerChoice();
                 playRound(humanChoiceNumber, getComputerChoice());
                 break;
-            case 'scissors':
+            case 'scissors buttons':
                 console.log("User: scissors");
                 humanChoiceNumber = 3;
                 //getComputerChoice();
@@ -73,27 +73,27 @@ function playGame () {
         if ((humanChoice - computerChoice) == -1 || (humanChoice - computerChoice) == 2) {
             computerScore++;
             console.log("Computer wins! User: ", humanScore, " Computer: ", computerScore);
-            roundWinner.textContent = "Round winner: COMPUTER";
+            roundWinner.textContent = "COMPUTER";
         }
         // ELIF (user - comp) = -2 || 1 -> user wins
         else if ((humanChoice - computerChoice) == -2 || (humanChoice - computerChoice) == 1) {
             humanScore++;
             console.log("User wins! User: ", humanScore, " Computer: ", computerScore);
-            roundWinner.textContent = "Round winner: USER";
+            roundWinner.textContent = "USER";
         }
         // ELIF (user == comp) -> tie
         else if (humanChoice == computerChoice) {
             console.log("It's a tie! User: ", humanScore, " Computer: ", computerScore);
-            roundWinner.textContent = "Round winner: TIE";
+            roundWinner.textContent = "TIE";
         }
         
-        userScore.textContent = `User score: ${humanScore}`;
-        computerScoreDisp.textContent = `Computer score: ${computerScore}`;
+        userScore.textContent = `${humanScore}`;
+        computerScoreDisp.textContent = `${computerScore}`;
 
         roundCounter++;
         console.log("Round #: ", roundCounter);
         console.log("___________________________\n");
-        roundCount.textContent = `Round: ${roundCounter}`;
+        roundCount.textContent = `${roundCounter}`;
     }
 
     // //*5 ROUNDS
