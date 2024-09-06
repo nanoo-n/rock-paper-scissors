@@ -35,7 +35,6 @@ function playGame () {
         }
 
         console.log("Computer: ", computerChoiceName);
-        computerChoiceNumber = computerChoice;
         return computerChoice;
     }
 
@@ -50,20 +49,15 @@ function playGame () {
             case 'rock buttons':
                 console.log("User: rock");
                 humanChoiceNumber = 1;
-                //getComputerChoice();
                 playRound(humanChoiceNumber, getComputerChoice());
                 break;
             case 'paper buttons':
                 console.log("User: paper");
-                humanChoiceNumber = 2;
-                //getComputerChoice();
-                playRound(humanChoiceNumber, getComputerChoice());
+                humanChoiceNumber = 2;playRound(humanChoiceNumber, getComputerChoice());
                 break;
             case 'scissors buttons':
                 console.log("User: scissors");
-                humanChoiceNumber = 3;
-                //getComputerChoice();
-                playRound(humanChoiceNumber, getComputerChoice());
+                humanChoiceNumber = 3;playRound(humanChoiceNumber, getComputerChoice());
                 break;
         }
     }
@@ -95,6 +89,14 @@ function playGame () {
         console.log("Round #: ", roundCounter);
         console.log("___________________________\n");
         roundCount.textContent = `${roundCounter}`;
+    }
+
+    function checkWinner () {
+
+    }
+
+    function resetGames () {
+
     }
 }
 

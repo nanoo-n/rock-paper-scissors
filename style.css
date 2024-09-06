@@ -13,6 +13,7 @@ body {
 
 .options {
     margin: 5px;
+    margin-top: 0px;
     text-align: center;
     border: 2px solid black;
 }
@@ -68,6 +69,7 @@ body {
 
 .round-counter {
     border: 2px solid black;
+    flex: 1;
 }
 
 .computer-score, .user-score {
@@ -88,4 +90,19 @@ body {
     font-size: 26px;
     font-weight: 300;
     height: 36px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.restart {
+    font-family: 'Roboto';
+    font-weight: 500;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    
 }
