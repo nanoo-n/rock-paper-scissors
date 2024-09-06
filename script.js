@@ -14,7 +14,6 @@ function playGame () {
     let computerScore = 0;
     let roundCounter = 0;
     let computerChoiceName;
-    let computerChoiceNumber;
     let humanChoiceNumber;
         
 
@@ -40,7 +39,9 @@ function playGame () {
         return computerChoice;
     }
 
-    options.addEventListener("click", (event) => {
+    options.addEventListener("click", buttonListener)
+
+    function buttonListener (event) {
         let target = event.target;
         
         //getComputerChoice();
@@ -65,10 +66,10 @@ function playGame () {
                 playRound(humanChoiceNumber, getComputerChoice());
                 break;
         }
-    })
+    }
 
     //  PLAY round
-    function playRound (humanChoice, computerChoice) {
+    function playRound (humanChoice, computerChoice) {   
         // IF (user - comp) = -1 || 2 -> computer wins
         if ((humanChoice - computerChoice) == -1 || (humanChoice - computerChoice) == 2) {
             computerScore++;
@@ -86,7 +87,7 @@ function playGame () {
             console.log("It's a tie! User: ", humanScore, " Computer: ", computerScore);
             roundWinner.textContent = "TIE";
         }
-        
+
         userScore.textContent = `${humanScore}`;
         computerScoreDisp.textContent = `${computerScore}`;
 
@@ -95,28 +96,6 @@ function playGame () {
         console.log("___________________________\n");
         roundCount.textContent = `${roundCounter}`;
     }
-
-    // //*5 ROUNDS
-    // for (let i = 0; (humanScore + computerScore) < 5; i++) {
-    //     playRound(humanChoiceNumber, computerChoiceNumber);
-
-    //     roundCounter++;
-    //     console.log("Round #: ", roundCounter);
-    //     console.log("___________________________\n");
-    // }
-
-    // if (humanScore > computerScore) {
-    //     console.log("User wins! ", humanScore, " - ", computerScore);
-    // }
-    // else if (humanScore < computerScore) {
-    //     console.log("Computer wins! ", computerScore, " - ", humanScore);
-    // }
-    // else if (humanScore == computerScore) {
-    //     console.log("Oh no! It's a tie. ", humanScore, " even.");
-    // }
-    // else {
-    //     console.log("Hmm... something's not right.");
-    // }
 }
 
 console.log("Lets play best of 5!");
