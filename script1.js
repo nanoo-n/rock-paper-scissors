@@ -1,20 +1,21 @@
-//  HTML selectors
-const options = document.querySelector(".options");
-const computerChoiceDisp = document.querySelector(".computer-choice");
-const roundWinner = document.querySelector(".round-winner");
-const userScore = document.querySelector(".user-score");
-const computerScoreDisp = document.querySelector(".computer-score");
-const roundCount = document.querySelector(".round-n");
-const winner = document.querySelector(".winner");
+// INIT game
+function playGame () {
+    //  HTML selectors
+    const options = document.querySelector(".options");
+    const computerChoiceDisp = document.querySelector(".computer-choice");
+    const roundWinner = document.querySelector(".round-winner");
+    const userScore = document.querySelector(".user-score");
+    const computerScoreDisp = document.querySelector(".computer-score");
+    const roundCount = document.querySelector(".round-n");
 
-//  INIT scores, roundCounter at 0
-let humanScore = 0;
-let computerScore = 0;
-let roundCounter = 0;
-let computerChoiceName;
-let humanChoiceNumber;
 
-function init () {
+    //  INIT scores, roundCounter at 0
+    let humanScore = 0;
+    let computerScore = 0;
+    let roundCounter = 0;
+    let computerChoiceName;
+    let humanChoiceNumber;
+        
 
     //  GENERATE computer answer (#)
     function getComputerChoice () {
@@ -46,18 +47,15 @@ function init () {
 
         switch(target.className) {
             case 'rock buttons':
-                checkWinner();
                 console.log("User: rock");
                 humanChoiceNumber = 1;
                 playRound(humanChoiceNumber, getComputerChoice());
                 break;
             case 'paper buttons':
-                checkWinner();
                 console.log("User: paper");
                 humanChoiceNumber = 2;playRound(humanChoiceNumber, getComputerChoice());
                 break;
             case 'scissors buttons':
-                checkWinner();
                 console.log("User: scissors");
                 humanChoiceNumber = 3;playRound(humanChoiceNumber, getComputerChoice());
                 break;
@@ -92,27 +90,15 @@ function init () {
         console.log("___________________________\n");
         roundCount.textContent = `${roundCounter}`;
     }
-}
 
-function checkWinner () {
-    if (roundCounter === 5) {
-        console.log("GAME OVER@!!!!!!!!!!!!!!!!!!!!!\n\n\n\n")
-        resetGames();
-    } else {
-        return;
+    function checkWinner () {
+
+    }
+
+    function resetGames () {
+
     }
 }
 
-function resetGames () {
-    humanScore = 0;
-    computerScore = 0;
-    roundCounter = 0;
-    computerChoiceDisp.textContent = "";
-    roundWinner.textContent = "";
-    userScore.textContent = `${humanScore}`;
-    computerScoreDisp.textContent = `${computerScore}`;
-    roundCount.textContent = `${roundCounter}`;
-    init();
-}
-
-window.onload = init();
+console.log("Lets play best of 5!");
+playGame();
