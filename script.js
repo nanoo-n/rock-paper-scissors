@@ -1,11 +1,13 @@
 //  HTML selectors
 const options = document.querySelector(".options");
+const restart = document.querySelector(".restart")
 const computerChoiceDisp = document.querySelector(".computer-choice");
 const roundWinner = document.querySelector(".round-winner");
 const userScore = document.querySelector(".user-score");
 const computerScoreDisp = document.querySelector(".computer-score");
 const roundCount = document.querySelector(".round-n");
-const winner = document.querySelector(".winner");
+const announcement = document.querySelector(".announcement");
+const announceWinner = document.createElement("div");
 
 //  INIT scores, roundCounter at 0
 let humanScore = 0;
@@ -46,18 +48,18 @@ function init () {
 
         switch(target.className) {
             case 'rock buttons':
-                checkWinner();
+                //checkWinner();
                 console.log("User: rock");
                 humanChoiceNumber = 1;
                 playRound(humanChoiceNumber, getComputerChoice());
                 break;
             case 'paper buttons':
-                checkWinner();
+                //checkWinner();
                 console.log("User: paper");
                 humanChoiceNumber = 2;playRound(humanChoiceNumber, getComputerChoice());
                 break;
             case 'scissors buttons':
-                checkWinner();
+                //checkWinner();
                 console.log("User: scissors");
                 humanChoiceNumber = 3;playRound(humanChoiceNumber, getComputerChoice());
                 break;
@@ -65,41 +67,56 @@ function init () {
     }
 
     //  PLAY round
-    function playRound (humanChoice, computerChoice) {   
-        // IF (user - comp) = -1 || 2 -> computer wins
-        if ((humanChoice - computerChoice) == -1 || (humanChoice - computerChoice) == 2) {
-            computerScore++;
-            console.log("Computer wins! User: ", humanScore, " Computer: ", computerScore);
-            roundWinner.textContent = "COMPUTER";
-        }
-        // ELIF (user - comp) = -2 || 1 -> user wins
-        else if ((humanChoice - computerChoice) == -2 || (humanChoice - computerChoice) == 1) {
-            humanScore++;
-            console.log("User wins! User: ", humanScore, " Computer: ", computerScore);
-            roundWinner.textContent = "USER";
-        }
-        // ELIF (user == comp) -> tie
-        else if (humanChoice == computerChoice) {
-            console.log("It's a tie! User: ", humanScore, " Computer: ", computerScore);
-            roundWinner.textContent = "TIE";
-        }
+    function playRound (humanChoice, computerChoice) {
+        if ((humanScore <= 5) || (computerScore <= 5)) {   
+            // IF (user - comp) = -1 || 2 -> computer wins
+            if ((humanChoice - computerChoice) == -1 || (humanChoice - computerChoice) == 2) {
+                computerScore++;
+                console.log("Computer wins! User: ", humanScore, " Computer: ", computerScore);
+                roundWinner.textContent = "COMPUTER";
+            }
+            // ELIF (user - comp) = -2 || 1 -> user wins
+            else if ((humanChoice - computerChoice) == -2 || (humanChoice - computerChoice) == 1) {
+                humanScore++;
+                console.log("User wins! User: ", humanScore, " Computer: ", computerScore);
+                roundWinner.textContent = "USER";
+            }
+            // ELIF (user == comp) -> tie
+            else if (humanChoice == computerChoice) {
+                console.log("It's a tie! User: ", humanScore, " Computer: ", computerScore);
+                roundWinner.textContent = "TIE";
+            }
 
-        userScore.textContent = `${humanScore}`;
-        computerScoreDisp.textContent = `${computerScore}`;
+            userScore.textContent = `${humanScore}`;
+            computerScoreDisp.textContent = `${computerScore}`;
 
-        roundCounter++;
-        console.log("Round #: ", roundCounter);
-        console.log("___________________________\n");
-        roundCount.textContent = `${roundCounter}`;
+            roundCounter++;
+            console.log("Round #: ", roundCounter);
+            console.log("___________________________\n");
+            roundCount.textContent = `${roundCounter}`;
+
+            checkWinner();
+        }
     }
 }
 
+restart.addEventListener("click", resetGames);
+
 function checkWinner () {
-    if (roundCounter === 5) {
-        console.log("GAME OVER@!!!!!!!!!!!!!!!!!!!!!\n\n\n\n")
-        resetGames();
-    } else {
-        return;
+    if ((humanScore === 5) || (computerScore === 5)) {
+        console.log("GAME OVER@!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
+        announceWinner.classList.add("announce-winner");
+
+        if (humanScore > computerScore) {
+            announceWinner.textContent =
+            `User wins. Please click on restart to play again.`;
+        } else {
+            announceWinner.textContent =
+            `Computer wins. Please click on restart to play again.`;
+        }
+        announcement.appendChild(announceWinner);
+
+        //resetGames();
     }
 }
 
@@ -112,7 +129,7 @@ function resetGames () {
     userScore.textContent = `${humanScore}`;
     computerScoreDisp.textContent = `${computerScore}`;
     roundCount.textContent = `${roundCounter}`;
-    init();
+    announcement.removeChild(announceWinner);
 }
 
-window.onload = init();
+init();
