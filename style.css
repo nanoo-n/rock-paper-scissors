@@ -107,7 +107,8 @@ body {
 
 .restart {
     font-family: 'Roboto';
-    font-weight: 500;
+    background-color: #b2e7f1;
+    font-weight: 700;
     margin-top: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
